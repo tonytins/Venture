@@ -5,7 +5,11 @@
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
-  <!-- Core kernel packages -->
+  <PropertyGroup>
+    <CosmosEnableStorage>true</CosmosEnableStorage>
+    <CosmosEnableNetwork>true</CosmosEnableNetwork>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Cosmos.Kernel" Version="3.0.87" />
     <PackageReference Include="Cosmos.Kernel.System" Version="3.0.87" />
