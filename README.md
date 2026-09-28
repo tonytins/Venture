@@ -1,10 +1,10 @@
 # VentureOS
 
-<p style="display: flex; justify-content: center; align-items: center;">
+<p align="center">
 <img src="./ventureos-screenshot.png" width="450"/>
 </p>
 <hr>
-<p style="justify-content: center; text-align: center;  align-items: center;>
+<p align="center">
   <a href="https://github.com/tonytins/Venture/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tonytins/Venture" alt="GitHub license"></a>
   <a href="https://github.com/tonytins/Venture/actions?query=workflow%3Acosmos.yml"><img src="https://img.shields.io/github/actions/workflow/status/tonytins/Venture/cosmos.yml" alt="GitHub Workflow Status"></a>
   <img src="https://img.shields.io/github/commit-activity/w/tonytins/Venture" alt="GitHub commit activity">
