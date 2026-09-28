@@ -14,6 +14,12 @@ struct SysInfo
     /// </summary>
     public const string VERSION = $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}";
 
+    public static string? IpAddress { get; set; } = string.Empty;
+    
+    public static string? MacAddress { get; set; } = string.Empty;
+    
+    public static string? Domain { get; set; }  = string.Empty;
+
     /// <summary>
     /// Generates the build number from the commit hash.
     /// </summary>

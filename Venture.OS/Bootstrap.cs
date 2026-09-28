@@ -13,7 +13,6 @@ public static class Bootstrap
             || !VfsManager.TryMount("ramfat", "", MountFlags.None, "/mnt", out _))
         {
             Console.WriteLine("RAM disk setup failed.");
-            return;
         }
     }
 
@@ -27,6 +26,8 @@ public static class Bootstrap
                                Link up: {NetworkManager.LinkUp}
                                Ready:   {NetworkManager.Ready}
                                """;
+            SysInfo.MacAddress = NetworkManager.MacAddress?.ToString();
+            SysInfo.Domain = NetworkManager.Name;
             Console.WriteLine(networkInfo);
         }
         
@@ -41,6 +42,7 @@ public static class Bootstrap
                             Subnet: {config.SubnetMask}
                             Gateway: {config.DefaultGateway}
                             """;
+            SysInfo.IpAddress = config.Address.ToString();
             Console.WriteLine(dhcpInfo);
         }
         else
