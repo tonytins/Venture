@@ -2,6 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
     <File Path="README.md" />
+    <File Path="run-arm64.sh" />
+    <File Path="run-x84.sh" />
   </Folder>
-  <Project Path="VentureOS/VentureOS.csproj" />
+  <Project Path="Venture.OS\Venture.OS.csproj" />
 </Solution>

@@ -1,4 +1,4 @@
-namespace Venture;
+namespace Venture.OS;
 
 /// <summary>
 /// Main kernel class - inherits from Cosmos.Kernel.System.Kernel.
@@ -9,10 +9,22 @@ public class Kernel : Sys.Kernel
     protected override void BeforeRun()
     {
         Console.WriteLine($"Initializing {SysInfo.NAME} kernel...");
+        
+        // RAM disk
+        BootRamDisk ramdisk = new("RAMDISK", 512, 65536); // 32 MiB
+        FatFilesystemType fat = new(ramdisk);
+        
+        if (!VfsManager.RegisterFilesystem("ramfat", fat)
+            || !VfsManager.TryFormat("ramfat", "", new FatFormatOptions { Type = FatType.Fat16 })
+            || !VfsManager.TryMount("ramfat", "", MountFlags.None, "/mnt", out _))
+        {
+            Console.WriteLine("RAM disk setup failed.");
+            return;
+        }
 
         // File system initialization
-        FatFilesystemType fat = new();
-
+        // TODO: Move to separate class
+        /*
         if (!VfsManager.RegisterFilesystem("fat", fat))
         {
             Console.WriteLine("Failed to register FAT file system.");
@@ -28,7 +40,7 @@ public class Kernel : Sys.Kernel
         if (VfsManager.TryMount("fat", StorageManager.Partitions[0], MountFlags.None, "/mnt", out var mount))
         {
             Console.WriteLine($"Mounted {mount.Name} at {mount.MountPoint}");
-        }
+        } */
 
         if (NetworkManager.DeviceCount > 0)
         {

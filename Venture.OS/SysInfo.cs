@@ -1,4 +1,4 @@
-namespace Venture;
+namespace Venture.OS;
 
 struct SysInfo
 {
