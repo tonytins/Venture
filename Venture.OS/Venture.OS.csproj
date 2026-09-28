@@ -8,6 +8,8 @@
 
   <PropertyGroup>
     <CosmosEnableStorage>true</CosmosEnableStorage>
+    <CosmosEnableNetwork>true</CosmosEnableNetwork>
+    <CosmosEnableMouse>true</CosmosEnableMouse>
   </PropertyGroup>
 
   <ItemGroup>

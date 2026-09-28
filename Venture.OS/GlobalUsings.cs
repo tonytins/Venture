@@ -1,7 +1,11 @@
-global using System.IO;
+// Global using directives
 global using System.Text;
 global using System.Net;
 global using System.Net.Sockets;
+global using System.Diagnostics;
+global using System.Drawing;
+global using System.IO;
+global using System.Numerics;
 
 // Cosmos kernel
 global using Sys = Cosmos.Kernel.System;
@@ -20,3 +24,8 @@ global using Cosmos.Kernel.System.Network.DNS;
 global using Cosmos.Kernel.System.Network.IPv4;
 global using Cosmos.Kernel.System.Network.IPv4.DHCP;
 global using Cosmos.Kernel.System.Timer;
+
+// Graphics
+global using Cosmos.Kernel.System.Graphics;
+global using Cosmos.Kernel.System.Graphics.Fonts;
+global using Cosmos.Kernel.System.Mouse;

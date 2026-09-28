@@ -8,7 +8,11 @@ public class Kernel : Sys.Kernel
 
     protected override void BeforeRun()
     {
-        Console.WriteLine($"Initializing {SysInfo.NAME} kernel...");
+        var delayInSeconds = TimeSpan.FromSeconds(0.5);
+        
+        Console.WriteLine($"Initializing kernel...");
+        
+        Thread.Sleep(delayInSeconds);
         
         // RAM disk
         BootRamDisk ramdisk = new("RAMDISK", 512, 65536); // 32 MiB
@@ -22,27 +26,61 @@ public class Kernel : Sys.Kernel
             return;
         }
         
+        Thread.Sleep(delayInSeconds);
+        
+        if (NetworkManager.DeviceCount > 0)
+        {
+            var networkInfo = $"""
+                               Device:  {NetworkManager.Name}
+                               MAC:     {NetworkManager.MacAddress}
+                               Link up: {NetworkManager.LinkUp}
+                               Ready:   {NetworkManager.Ready}
+                               """;
+            Console.WriteLine(networkInfo);
+        }
+        
+        Thread.Sleep(delayInSeconds);
+
+        DhcpClient dhcpClient = new();
+
+        if (dhcpClient.SendDiscoverPacket() == -1) return;
+        var config = NetworkManager.Primary.IPConfig;
+        if (config is not null)
+        {
+            var dhcpInfo = $"""
+                            IP address: {config.Address}
+                            Subnet: {config.SubnetMask}
+                            Gateway: {config.DefaultGateway}
+                            """;
+            Console.WriteLine(dhcpInfo);
+        }
+        else
+            Console.WriteLine("DHCP timed out");
+        
+        Thread.Sleep(delayInSeconds);
+        
+        Console.Clear();
+        
         Console.WriteLine($"{SysInfo.NAME} {SysInfo.VERSION} (Build {SysInfo.BuildNumber}) booted successfully!");
         Console.WriteLine("Type a command to get it executed.");
-    }
 
-    protected override void OnBoot()
-    {
-        base.OnBoot();
+        /*
+           var disk = StorageManager.PrimaryDevice;
 
-        var disk = StorageManager.PrimaryDevice;
-        if (disk is not null) return;
-        Console.WriteLine("No disk");
-        
+                 if (disk is not null) return;
+                 Console.WriteLine("No disk found.");
+
+                 Thread.Sleep(timeDelay);
+
         if (Gpt.IsGpt(disk))
             Console.WriteLine($"GPT {Gpt.Parse(disk).Count} partition(s)");
         else if (Mbr.IsMbr(disk))
             Console.WriteLine($"Mbr {Mbr.Parse(disk).Count} partition(s)");
         else
             Console.WriteLine($"Unknown disk {disk}");
-        
+
         Gpt.Create(disk);
-        
+
         if (!PartitionManager.Create(disk, startSector: 2048, sectorCount: 131072,
                 mbrSystemId: 0x0C, gptType: Gpt.BasicDataPartitionType))
         {
@@ -57,19 +95,25 @@ public class Kernel : Sys.Kernel
             Type = FatType.Fat32,
             VolumeLabel = "VENTURE     "
         };
-        
+
         if (StorageManager.Partitions.Count == 0
             || !VfsManager.TryFormat("fat", StorageManager.Partitions[0], formatOptions))
-        {
             Console.WriteLine("Format failed");
-        }
+        */
+    }
+
+    protected override void OnBoot()
+    {
+        base.OnBoot();
+        
+        
     }
 
     protected override void Run()
     {
         Console.Write("> ");
         var input = Console.ReadLine();
-
+        
         if (string.IsNullOrEmpty(input))
             return;
 
@@ -93,7 +137,6 @@ public class Kernel : Sys.Kernel
                 Console.WriteLine("Halting system...");
                 Stop();
                 break;
-
             default:
                 Console.WriteLine($"\"{input}\" is not a command");
                 break;

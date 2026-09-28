@@ -1,9 +1,17 @@
 # VentureOS
 
-Named after the Siemens' [passenger cars](https://en.wikipedia.org/wiki/Siemens_Venture), VentureOS is my hobby operating
-system written in C# and based on the [Cosmos](https://github.com/CosmosOS/Cosmos) framework.
+<p style="text-align: center;">
+<img src="./ventureos-screenshot.png" width="450" />
+  <br>
+  <a href="https://github.com/tonytins/Venture/blob/main/LICENSE"><img src="https://img.shields.io/github/license/tonytins/Venture" alt="GitHub license"></a>
+  <a href="https://github.com/tonytins/Venture/actions?query=workflow%3Acosmos.yml"><img src="https://img.shields.io/github/actions/workflow/status/tonytins/Venture/cosmos.yml" alt="GitHub Workflow Status"></a>
+  <img src="https://img.shields.io/github/commit-activity/w/tonytins/Venture" alt="GitHub commit activity">
+</p>
 
-## Getting Started
+Named after the Siemens' [passenger cars](https://en.wikipedia.org/wiki/Siemens_Venture), VentureOS is my hobby operating
+system written in C# and based on the [Cosmos](https://github.com/CosmosOS/Cosmos) framework. It is the spiritual successor to my earlier project, [TOMAS](https://github.com/tonytins/tomas/).
+
+## 🚀Getting Started
 
 See the Cosmos [installation guide](https://cosmosos.github.io/articles/user/install.html).
 
@@ -23,17 +31,18 @@ CosmosSetup-<version>-windows.exe
 
 #### macOS/Linux
 
-1. ``dotnet tool install -g Cosmos.Tools``
-2. ``cosmos install``
+```
+dotnet tool install -g Cosmos.Tools
+cosmos install
+```
 
 ### Building
 
 ```
-qemu-img create disk.img 64M
 cosmos build
-cosmos run --disk disk.img
+cosmos run
 ```
 
-## No Copyright
+## ⚖️ No Copyright
 
 Copyrights and any related rights for VentureOS are waived via the [UNLICENSE](UNLICENSE). Credit still appreciated.
