@@ -1,6 +1,6 @@
 namespace Venture.OS;
 
-public static class Bootstrap
+internal static class Bootstrap
 {
     public static void BootIntoRam()
     {
@@ -26,8 +26,8 @@ public static class Bootstrap
                                Link up: {NetworkManager.LinkUp}
                                Ready:   {NetworkManager.Ready}
                                """;
-            SysInfo.MacAddress = NetworkManager.MacAddress?.ToString();
-            SysInfo.Domain = NetworkManager.Name;
+            HostInfo.MacAddress = NetworkManager.MacAddress?.ToString();
+            HostInfo.Domain = NetworkManager.Name;
             Console.WriteLine(networkInfo);
         }
         
@@ -42,7 +42,7 @@ public static class Bootstrap
                             Subnet: {config.SubnetMask}
                             Gateway: {config.DefaultGateway}
                             """;
-            SysInfo.IpAddress = config.Address.ToString();
+            HostInfo.IpAddress = config.Address.ToString();
             Console.WriteLine(dhcpInfo);
         }
         else

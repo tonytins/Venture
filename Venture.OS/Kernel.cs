@@ -18,7 +18,7 @@ public class Kernel : Sys.Kernel
         
         Console.Clear();
         
-        Console.WriteLine($"{SysInfo.NAME} {SysInfo.VERSION} (Build {SysInfo.BuildNumber}) booted successfully!");
+        Console.WriteLine($"{HostInfo.Name} {HostInfo.Version} (Build {HostInfo.BuildNumber}) booted successfully!");
         Console.WriteLine("Type a command to get it executed.");
     }
 
