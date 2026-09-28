@@ -23,6 +23,6 @@ jobs:
     - name: Install Cosmos CLI
       run: dotnet tool install -g Cosmos.Tools
     - name: Install Cosmos toolchain
-      run: cosmos install
+      run: cosmos install -y
     - name: Build
       run: cd "Venture.OS" && cosmos build
