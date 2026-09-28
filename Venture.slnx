@@ -3,6 +3,7 @@
     <File Path=".gitignore" />
     <File Path="README.md" />
     <File Path="run.sh" />
+    <File Path=".github/workflows/cosmos.yml" />
   </Folder>
   <Project Path="Venture.OS\Venture.OS.csproj" />
 </Solution>

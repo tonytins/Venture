@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Setup Cosmos
       uses: actions/setup-dotnet@v4
       with:
@@ -24,5 +24,7 @@ jobs:
       run: dotnet tool install -g Cosmos.Tools
     - name: Install Cosmos toolchain
       run: cosmos install -y
+    - name: Validate toolchain
+      run: cosmos check
     - name: Build
       run: cosmos build -p Venture.OS

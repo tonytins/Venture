@@ -21,40 +21,48 @@ public class Kernel : Sys.Kernel
             Console.WriteLine("RAM disk setup failed.");
             return;
         }
-
-        // File system initialization
-        // TODO: Move to separate class
-        /*
-        if (!VfsManager.RegisterFilesystem("fat", fat))
-        {
-            Console.WriteLine("Failed to register FAT file system.");
-            return;
-        }
-
-        if (StorageManager.Partitions.Count == 0)
-        {
-            Console.WriteLine("No partitions found.");
-            return;
-        }
-
-        if (VfsManager.TryMount("fat", StorageManager.Partitions[0], MountFlags.None, "/mnt", out var mount))
-        {
-            Console.WriteLine($"Mounted {mount.Name} at {mount.MountPoint}");
-        } */
-
-        if (NetworkManager.DeviceCount > 0)
-        {
-            var networkDevices = $@"""
-                                          Device: {NetworkManager.Name}
-                                          MAC: {NetworkManager.MacAddress}
-                                          Link up: {NetworkManager.LinkUp}
-                                          Ready: {NetworkManager.Ready}
-                                          """;
-            Console.WriteLine(networkDevices);
-        }
-
+        
         Console.WriteLine($"{SysInfo.NAME} {SysInfo.VERSION} (Build {SysInfo.BuildNumber}) booted successfully!");
         Console.WriteLine("Type a command to get it executed.");
+    }
+
+    protected override void OnBoot()
+    {
+        base.OnBoot();
+
+        var disk = StorageManager.PrimaryDevice;
+        if (disk is not null) return;
+        Console.WriteLine("No disk");
+        
+        if (Gpt.IsGpt(disk))
+            Console.WriteLine($"GPT {Gpt.Parse(disk).Count} partition(s)");
+        else if (Mbr.IsMbr(disk))
+            Console.WriteLine($"Mbr {Mbr.Parse(disk).Count} partition(s)");
+        else
+            Console.WriteLine($"Unknown disk {disk}");
+        
+        Gpt.Create(disk);
+        
+        if (!PartitionManager.Create(disk, startSector: 2048, sectorCount: 131072,
+                mbrSystemId: 0x0C, gptType: Gpt.BasicDataPartitionType))
+        {
+            Console.WriteLine("Create failed");
+            return;
+        }
+
+        StorageManager.RescanPartitions(disk);
+
+        FatFormatOptions formatOptions = new()
+        {
+            Type = FatType.Fat32,
+            VolumeLabel = "VENTURE     "
+        };
+        
+        if (StorageManager.Partitions.Count == 0
+            || !VfsManager.TryFormat("fat", StorageManager.Partitions[0], formatOptions))
+        {
+            Console.WriteLine("Format failed");
+        }
     }
 
     protected override void Run()
