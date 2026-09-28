@@ -25,4 +25,4 @@ jobs:
     - name: Install Cosmos toolchain
       run: cosmos install -y
     - name: Build
-      run: cd "Venture.OS" && cosmos build
+      run: cosmos build -p Venture.OS
