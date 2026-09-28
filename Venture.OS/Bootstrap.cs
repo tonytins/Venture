@@ -4,6 +4,8 @@ internal static class Bootstrap
 {
     public static void BootIntoRam()
     {
+        Console.WriteLine("Initializing filesystem...");
+        
         // RAM disk
         BootRamDisk ramdisk = new("RAMDISK", 512, 65536); // 32 MiB
         FatFilesystemType fat = new(ramdisk);
@@ -16,8 +18,17 @@ internal static class Bootstrap
         }
     }
 
+    public static void IsTimeManagerEnabled()
+    {
+        Console.WriteLine("Initializing time manager...");
+        if (!TimerManager.IsInitialized)
+            Console.WriteLine("Time manager setup failed.");
+    }
+
     public static void ConnectToNetwork()
     {
+        Console.WriteLine("Initializing network...");
+        
         if (NetworkManager.DeviceCount > 0)
         {
             var networkInfo = $"""

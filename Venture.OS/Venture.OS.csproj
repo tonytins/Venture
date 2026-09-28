@@ -10,7 +10,8 @@
   <PropertyGroup>
     <CosmosEnableStorage>true</CosmosEnableStorage>
     <CosmosEnableNetwork>true</CosmosEnableNetwork>
-    <CosmosEnableMouse>true</CosmosEnableMouse>
+    <CosmosEnableTimer>true</CosmosEnableTimer>
+    <CosmosEnableScheduler>true</CosmosEnableScheduler>
   </PropertyGroup>
 
   <ItemGroup>

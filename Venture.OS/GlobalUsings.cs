@@ -29,3 +29,8 @@ global using Cosmos.Kernel.System.Timer;
 global using Cosmos.Kernel.System.Graphics;
 global using Cosmos.Kernel.System.Graphics.Fonts;
 global using Cosmos.Kernel.System.Mouse;
+
+// Timer
+using Cosmos.Kernel.HAL.Interfaces.Devices;
+using Cosmos.Kernel.System.Diagnostics;
+using Cosmos.Kernel.System.Timer;
