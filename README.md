@@ -3,7 +3,6 @@
 Named after the Siemens' [passenger cars](https://en.wikipedia.org/wiki/Siemens_Venture), VentureOS is my hobby operating
 system written in C# and based on the [Cosmos](https://github.com/CosmosOS/Cosmos) framework.
 
-
 ## Getting Started
 
 See the Cosmos [installation guide](https://cosmosos.github.io/articles/user/install.html).
@@ -27,15 +26,14 @@ CosmosSetup-<version>-windows.exe
 1. ``dotnet tool install -g Cosmos.Tools``
 2. ``cosmos install``
 
-
 ### Building
 
 ```
+qemu-img create disk.img 64M
 cosmos build
-cosmos run
+cosmos run --disk disk.img
 ```
-
 
 ## No Copyright
 
-Copyrights and any related rights for VentureOS are waived via [UNLICENSE](UNLICENSE). Credit still appreciated.
+Copyrights and any related rights for VentureOS are waived via the [UNLICENSE](UNLICENSE). Credit still appreciated.
