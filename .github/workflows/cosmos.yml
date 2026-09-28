@@ -27,4 +27,4 @@ jobs:
     - name: Validate toolchain
       run: cosmos check
     - name: Build
-      run: cosmos build -p Venture.OS
+      run: cosmos build -v -p Venture.OS
