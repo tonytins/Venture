@@ -44,7 +44,7 @@ public class Kernel : Sys.Kernel
 
         if (NetworkManager.DeviceCount > 0)
         {
-            const string networkDevices = """
+            var networkDevices = $@"""
                                           Device: {NetworkManager.Name}
                                           MAC: {NetworkManager.MacAddress}
                                           Link up: {NetworkManager.LinkUp}
