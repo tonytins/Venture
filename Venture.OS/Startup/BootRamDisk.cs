@@ -1,4 +1,4 @@
-namespace Venture.OS;
+namespace Venture.OS.Startup;
 
 internal sealed class BootRamDisk(string name, ulong blockSize, ulong blockCount) : IBlockDevice
 {

@@ -1,3 +1,5 @@
+using Venture.OS.Startup;
+
 namespace Venture.OS;
 
 /// <summary>
@@ -23,12 +25,12 @@ public class Kernel : Sys.Kernel
         Console.WriteLine($"{HostInfo.Name} {HostInfo.Version} (Build {HostInfo.BuildNumber}) booted successfully!");
         Console.WriteLine("Type a command to get it executed.");
     }
-
+    
+    // Early initialization
     protected override void OnBoot()
     {
-        base.OnBoot();
-        
-        
+        base.OnBoot();   // keep the KernelConsole setup; drop this line to boot headless
+
     }
 
     protected override void Run()
@@ -54,7 +56,6 @@ public class Kernel : Sys.Kernel
             case "clear":
                 Console.Clear();
                 break;
-
             case "halt":
                 Console.WriteLine("Halting system...");
                 Stop();

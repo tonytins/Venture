@@ -27,6 +27,10 @@ internal struct HostInfo
     /// </summary>
     public static string? Domain { get; set; } = string.Empty;
 
+    public static bool IsLinkedToNetwork => NetworkManager.DeviceCount > 0;
+
+    public static bool HasIp => NetworkManager.Primary.IPConfig is not null;
+
 
     /// <summary>
     /// Generates the build number from the commit hash.

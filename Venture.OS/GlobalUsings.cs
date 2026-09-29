@@ -34,3 +34,7 @@ global using Cosmos.Kernel.System.Mouse;
 using Cosmos.Kernel.HAL.Interfaces.Devices;
 using Cosmos.Kernel.System.Diagnostics;
 using Cosmos.Kernel.System.Timer;
+
+// Diagnostics
+using Cosmos.Kernel.System.Diagnostics;
+using Cosmos.Kernel.System.Storage;

@@ -1,4 +1,6 @@
-namespace Venture.OS;
+using Cosmos.Kernel.System.Diagnostics;
+
+namespace Venture.OS.Startup;
 
 internal static class Bootstrap
 {
@@ -29,7 +31,7 @@ internal static class Bootstrap
     {
         Console.WriteLine("Initializing network...");
         
-        if (NetworkManager.DeviceCount > 0)
+        if (HostInfo.IsLinkedToNetwork)
         {
             var networkInfo = $"""
                                Device:  {NetworkManager.Name}
@@ -39,21 +41,23 @@ internal static class Bootstrap
                                """;
             HostInfo.MacAddress = NetworkManager.MacAddress?.ToString();
             HostInfo.Domain = NetworkManager.Name;
+            Log.WriteString(networkInfo);
             Console.WriteLine(networkInfo);
         }
         
         DhcpClient dhcpClient = new();
 
         if (dhcpClient.SendDiscoverPacket() == -1) return;
-        var config = NetworkManager.Primary.IPConfig;
-        if (config is not null)
+        if (HostInfo.HasIp)
         {
+            var config = NetworkManager.Primary.IPConfig;
             var dhcpInfo = $"""
-                            IP address: {config.Address}
-                            Subnet: {config.SubnetMask}
-                            Gateway: {config.DefaultGateway}
+                            IP address: {config?.Address}
+                            Subnet: {config?.SubnetMask}
+                            Gateway: {config?.DefaultGateway}
                             """;
-            HostInfo.IpAddress = config.Address.ToString();
+            HostInfo.IpAddress = config?.Address.ToString();
+            Log.WriteString(dhcpInfo);
             Console.WriteLine(dhcpInfo);
         }
         else
