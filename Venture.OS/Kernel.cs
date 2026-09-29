@@ -19,6 +19,7 @@ public class Kernel : Sys.Kernel
         Bootstrap.IsTimeManagerEnabled();
         Thread.Sleep(delayInSeconds);
         Bootstrap.ConnectToNetwork();
+        Thread.Sleep(delayInSeconds);
         
         Console.Clear();
         

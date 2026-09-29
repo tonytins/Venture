@@ -12,19 +12,10 @@ internal struct HostInfo
     /// </summary>
     public const string Version = $"{ThisAssembly.Git.SemVer.Major}.{ThisAssembly.Git.SemVer.Minor}.{ThisAssembly.Git.SemVer.Patch}";
     
-    /// <summary>
-    /// Gets or sets the IP address of the host system.
-    /// </summary>
     public static string? IpAddress { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the MAC address of the host system.
-    /// </summary>
     public static string? MacAddress { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Gets or sets the domain name of the host system.
-    /// </summary>
     public static string? Domain { get; set; } = string.Empty;
 
     public static bool IsLinkedToNetwork => NetworkManager.DeviceCount > 0;

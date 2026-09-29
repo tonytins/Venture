@@ -1,5 +1,3 @@
-using Cosmos.Kernel.System.Diagnostics;
-
 namespace Venture.OS.Startup;
 
 internal static class Bootstrap

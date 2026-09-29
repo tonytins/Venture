@@ -5,9 +5,17 @@ name: Cosmos
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [
+      "main",
+      "feature/*",
+      "v*"
+    ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ 
+      "main",
+      "feature/*",
+      "v*"
+    ]
 
 jobs:
   build:

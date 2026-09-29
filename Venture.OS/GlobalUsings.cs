@@ -31,10 +31,10 @@ global using Cosmos.Kernel.System.Graphics.Fonts;
 global using Cosmos.Kernel.System.Mouse;
 
 // Timer
-using Cosmos.Kernel.HAL.Interfaces.Devices;
-using Cosmos.Kernel.System.Diagnostics;
-using Cosmos.Kernel.System.Timer;
+global using Cosmos.Kernel.HAL.Interfaces.Devices;
+global using Cosmos.Kernel.System.Diagnostics;
+global using Cosmos.Kernel.System.Timer;
 
 // Diagnostics
-using Cosmos.Kernel.System.Diagnostics;
-using Cosmos.Kernel.System.Storage;
+global using Cosmos.Kernel.System.Diagnostics;
+global using Cosmos.Kernel.System.Storage;

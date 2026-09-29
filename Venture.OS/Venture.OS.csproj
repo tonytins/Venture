@@ -7,13 +7,6 @@
     <AssemblyName>Venture</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <CosmosEnableStorage>true</CosmosEnableStorage>
-    <CosmosEnableNetwork>true</CosmosEnableNetwork>
-    <CosmosEnableTimer>true</CosmosEnableTimer>
-    <CosmosEnableScheduler>true</CosmosEnableScheduler>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Cosmos.Kernel" Version="3.0.87" />
     <PackageReference Include="Cosmos.Kernel.System" Version="3.0.87" />
