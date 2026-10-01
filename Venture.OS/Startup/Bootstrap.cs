@@ -5,11 +5,11 @@ internal static class Bootstrap
     public static void BootIntoRam()
     {
         Console.WriteLine("Initializing filesystem...");
-        
+
         // RAM disk
         BootRamDisk ramdisk = new("RAMDISK", 512, 65536); // 32 MiB
         FatFilesystemType fat = new(ramdisk);
-        
+
         if (!VfsManager.RegisterFilesystem("ramfat", fat)
             || !VfsManager.TryFormat("ramfat", "", new FatFormatOptions { Type = FatType.Fat16 })
             || !VfsManager.TryMount("ramfat", "", MountFlags.None, "/mnt", out _))
@@ -28,7 +28,7 @@ internal static class Bootstrap
     public static void ConnectToNetwork()
     {
         Console.WriteLine("Initializing network...");
-        
+
         if (HostInfo.IsLinkedToNetwork)
         {
             var networkInfo = $"""
@@ -39,10 +39,9 @@ internal static class Bootstrap
                                """;
             HostInfo.MacAddress = NetworkManager.MacAddress?.ToString();
             HostInfo.Domain = NetworkManager.Name;
-            Log.WriteString(networkInfo);
             Console.WriteLine(networkInfo);
         }
-        
+
         DhcpClient dhcpClient = new();
 
         if (dhcpClient.SendDiscoverPacket() == -1) return;
@@ -55,7 +54,6 @@ internal static class Bootstrap
                             Gateway: {config?.DefaultGateway}
                             """;
             HostInfo.IpAddress = config?.Address.ToString();
-            Log.WriteString(dhcpInfo);
             Console.WriteLine(dhcpInfo);
         }
         else

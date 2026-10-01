@@ -11,7 +11,7 @@ public class Kernel : Sys.Kernel
     protected override void BeforeRun()
     {
         var delayInSeconds = TimeSpan.FromSeconds(0.5);
-        
+
         Console.WriteLine($"Initializing kernel...");
         Thread.Sleep(delayInSeconds);
         Bootstrap.BootIntoRam();
@@ -20,13 +20,13 @@ public class Kernel : Sys.Kernel
         Thread.Sleep(delayInSeconds);
         Bootstrap.ConnectToNetwork();
         Thread.Sleep(delayInSeconds);
-        
+
         Console.Clear();
-        
+
         Console.WriteLine($"{HostInfo.Name} {HostInfo.Version} (Build {HostInfo.BuildNumber}) booted successfully!");
         Console.WriteLine("Type a command to get it executed.");
     }
-    
+
     // Early initialization
     protected override void OnBoot()
     {
@@ -38,20 +38,20 @@ public class Kernel : Sys.Kernel
     {
         Console.Write("> ");
         var input = Console.ReadLine();
-        
+
         if (string.IsNullOrEmpty(input))
             return;
 
         switch (input.ToLower())
         {
             case "help":
-                const string help = """
+                const string Help = """
                                     Available commands:
                                         help     - Show this help message
                                         clear    - Clear the screen
                                         halt     - Halt the system
                                     """;
-                Console.WriteLine(help);
+                Console.WriteLine(Help);
                 break;
 
             case "clear":
